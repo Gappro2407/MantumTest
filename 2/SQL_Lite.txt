@@ -1,0 +1,17 @@
+CREATE TABLE animal ( idAnimal INTEGER PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(20), edad INTEGER(3), fechaNacimiento DATETIME );
+
+CREATE TABLE tipoAnimal ( idTipoAnimal INTEGER PRIMARY KEY AUTOINCREMENT, tieneVertebras BOOLEAN, tipoAlimento VARCHAR(100), diurno BOOLEAN, depredador BOOLEAN, cantidadPatas INTEGER(2), idAnimal INTEGER, FOREIGN KEY(idAnimal) REFERENCES animal(idAnimal))
+
+CREATE TABLE mamifero ( idMamifero INTEGER PRIMARY KEY AUTOINCREMENT, domestico BOOLEAN, genero VARCHAR(20), familia varchar(100),idTipoAnimal INTEGER, FOREIGN KEY(idTipoAnimal) REFERENCES tipoAnimal(idTipoAnimal))
+
+INSERT INTO animal (nombre,edad,fechanacimiento) VALUES ('SrGato', 2, '2020-07-24');
+
+INSERT INTO tipoAnimal (tienevertebras,tipoalimento,diurno,depredador,cantidadpatas,idanimal) VALUES ( 1, 'Croquetas', 0, 1, 4, 1);
+
+INSERT INTO mamifero (domestico,genero,familia,idTipoAnimal) VALUES (1, 'Masculino','Felinos',1);
+
+SELECT
+	nombre
+FROM
+	animal
+INNER JOIN tipoAnimal ON tipoAnimal.idtipoanimal = animal.idanimal INNER JOIN mamifero ON mamifero.idMamifero = tipoAnimal.idTipoAnimal
